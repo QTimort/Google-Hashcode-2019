@@ -5,7 +5,7 @@ import eu.epitech.training_hashcode_2019.model.InputData;
 import java.io.InputStream;
 
 public class Main {
-    private static final String INPUT_PATH = "/eu.epitech.training_hashcode_2019/input/";
+    private static final String INPUT_PATH = "/input/";
 
     public static InputStream getInputResource(final String inputName) {
         return (Main.class.getResourceAsStream(INPUT_PATH + inputName));
