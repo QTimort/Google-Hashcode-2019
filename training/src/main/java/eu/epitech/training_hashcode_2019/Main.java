@@ -35,7 +35,7 @@ public class Main {
             new Validator(inputData).validateSlices(slices);
             System.out.println(Score.compute(slices));
             Writer.submissionToFile(
-                    OUT_PATH + input.substring(0, input.lastIndexOf('.')).concat(".out"), true, slices
+                    OUT_PATH + input.substring(0, input.lastIndexOf('.')).concat(".out"), false, slices
             );
         });
     }
