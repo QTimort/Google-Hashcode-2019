@@ -6,6 +6,7 @@ import eu.epitech.training_hashcode_2019.solver.FirstSolver;
 import eu.epitech.training_hashcode_2019.solver.ISolver;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        final List<String> inputs = Arrays.asList(args);
+        final List<String> inputs = new ArrayList<>(Arrays.asList(args));
         final ISolver solver = new FirstSolver();
         if (inputs.isEmpty()) {
             inputs.add("a_example.in");
@@ -29,7 +30,7 @@ public class Main {
 
         inputs.forEach(input -> {
             final InputData inputData = Parser.toInputData(getInputResource(input));
-            System.out.println(inputData);
+            //System.out.println(inputData);
             final Slices slices = solver.solve(inputData);
             new Validator(inputData).validateSlices(slices);
             System.out.println(Score.compute(slices));

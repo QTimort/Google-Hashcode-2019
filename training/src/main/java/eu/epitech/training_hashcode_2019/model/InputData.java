@@ -34,23 +34,29 @@ public class InputData {
                 .collect(Collectors.toList()));
     }
 
+    public long getIngredientCount(final int row0, final int column0, final int row1, final int column1, Ingredient ingredient) {
+        final List<Pair<Integer, Integer>> positions = getPositions(row0, column0, row1, column1);
+        return (positions
+                .stream()
+                .map(p -> this.ingredients[p.getKey()][p.getValue()])
+                .filter(i -> i == ingredient)
+                .count());
+    }
+
     public List<Pair<Integer, Integer>> getPositions(final int row0, final int column0, final int row1, final int column1) {
         final int rowIncr = (row0 < row1) ? (+1) : (-1);
         final int colIncr = (column0 < column1) ? (+1) : (-1);
         final List<Pair<Integer, Integer>> pos = new ArrayList<>();
-        int rowIt = row0;
-        int colIt = column0;
+        int y = row0;
+        int x = column0;
         do {
             do {
-                pos.add(new Pair<>(rowIt, colIt));
-                if (colIt != column1) {
-                    colIt += colIncr;
-                }
-            } while (colIt != column1);
-            if (rowIt != row1) {
-                rowIt += rowIncr;
-            }
-        } while(rowIt != row1);
+                pos.add(new Pair<>(y, x));
+                x += colIncr;
+            } while (x != (column1 + colIncr));
+            x = column0;
+            y += rowIncr;
+        } while (y != (row1 + rowIncr));
 
         return (pos);
     }

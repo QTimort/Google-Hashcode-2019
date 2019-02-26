@@ -15,13 +15,18 @@ public class Validator {
         this.inputData = inputData;
     }
 
+    public static void Assert(boolean predicate) {
+        if (!predicate)
+            throw new RuntimeException("Assertion failed");
+    }
+
     public void validateSlice(final Slice slice) {
         final List<Ingredient> ingredients = inputData.getIngredients(slice);
-        assert ingredients.size() <= inputData.getMaxCellsPerSlice();
+        Assert(ingredients.size() <= inputData.getMaxCellsPerSlice());
         final long tomatoCount = ingredients.stream().filter(i -> i == Ingredient.Tomato).count();
-        assert tomatoCount >= inputData.getMinIngredients();
+        Assert(tomatoCount >= inputData.getMinIngredients());
         final long mushroomCount = ingredients.size() - tomatoCount;
-        assert mushroomCount >= inputData.getMinIngredients();
+        Assert(mushroomCount >= inputData.getMinIngredients());
     }
 
     public void validateOverlap(final Slices slices) {
@@ -30,7 +35,7 @@ public class Validator {
         for (final Slice slice : slices.getSlices()) {
             final List<Pair<Integer, Integer>> positions = inputData.getPositions(slice);
             for (final Pair<Integer, Integer> position : positions) {
-                assert !used[position.getKey()][position.getValue()];
+                Assert(!used[position.getKey()][position.getValue()]);
                 used[position.getKey()][position.getValue()] = true;
             }
         }
