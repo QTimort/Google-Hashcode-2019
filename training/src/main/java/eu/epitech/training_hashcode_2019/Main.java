@@ -11,6 +11,7 @@ import java.util.Vector;
 
 public class Main {
     private static final String INPUT_PATH = "/input/";
+    private static final String OUT_PATH = "./target/";
 
     public static InputStream getInputResource(final String inputName) {
         return (Main.class.getResourceAsStream(INPUT_PATH + inputName));
@@ -36,5 +37,6 @@ public class Main {
         // todo solve
         new Validator(inputData).validateSlices(slices);
         System.out.println(Score.compute(slices));
+        Writer.submissionToFile(OUT_PATH + "test.out", true, slices);
     }
 }

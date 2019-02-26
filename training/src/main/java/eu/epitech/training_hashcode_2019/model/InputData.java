@@ -56,11 +56,11 @@ public class InputData {
     }
 
     public List<Pair<Integer, Integer>> getPositions(final Slice slice) {
-        return this.getPositions(slice.getRow0(), slice.getColumn0(), slice.getColumn0(), slice.getColumn1());
+        return this.getPositions(slice.getRow0(), slice.getColumn0(), slice.getRow1(), slice.getColumn1());
     }
 
     public List<Ingredient> getIngredients(final Slice slice) {
-        return this.getIngredients(slice.getRow0(), slice.getColumn0(), slice.getColumn0(), slice.getColumn1());
+        return this.getIngredients(slice.getRow0(), slice.getColumn0(), slice.getRow1(), slice.getColumn1());
     }
 
     @Override
