@@ -1,13 +1,13 @@
 package eu.epitech.training_hashcode_2019;
 
 import eu.epitech.training_hashcode_2019.model.InputData;
-import eu.epitech.training_hashcode_2019.model.Slice;
 import eu.epitech.training_hashcode_2019.model.Slices;
+import eu.epitech.training_hashcode_2019.solver.FirstSolver;
+import eu.epitech.training_hashcode_2019.solver.ISolver;
 
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
 public class Main {
     private static final String INPUT_PATH = "/input/";
@@ -18,25 +18,24 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        final String input;
-        if (args.length > 0) {
-            input = args[0];
-        } else {
-            input = "a_example.in";
+        final List<String> inputs = Arrays.asList(args);
+        final ISolver solver = new FirstSolver();
+        if (inputs.isEmpty()) {
+            inputs.add("a_example.in");
+            inputs.add("b_small.in");
+            inputs.add("c_medium.in");
+            inputs.add("d_big.in");
         }
 
-        final List<Slice> sliceList = new ArrayList<Slice>() {{
-            add(new Slice(0, 2, 0, 1));
-            add(new Slice(0, 2, 2, 2));
-            add(new Slice(0, 2, 3, 4));
-        }};
-        final Slices slices = new Slices(new Vector<>(sliceList));
-
-        final InputData inputData = Parser.toInputData(getInputResource(input));
-        System.out.println(inputData);
-        // todo solve
-        new Validator(inputData).validateSlices(slices);
-        System.out.println(Score.compute(slices));
-        Writer.submissionToFile(OUT_PATH + "test.out", true, slices);
+        inputs.forEach(input -> {
+            final InputData inputData = Parser.toInputData(getInputResource(input));
+            System.out.println(inputData);
+            final Slices slices = solver.solve(inputData);
+            new Validator(inputData).validateSlices(slices);
+            System.out.println(Score.compute(slices));
+            Writer.submissionToFile(
+                    OUT_PATH + input.substring(0, input.lastIndexOf('.')).concat(".out"), true, slices
+            );
+        });
     }
 }
