@@ -52,4 +52,13 @@ public class OpDictionnary {
         vertImageIds.remove(imageId);
         horiImageIds.remove(imageId);
     }
+
+    public static int getImageTagsPopularity(int imageId) {
+        final Image image = images[imageId];
+        int popularity = 0;
+        for (int tagId : image.getTags()) {
+            popularity += tagImages.get(tagId).size();
+        }
+        return popularity;
+    }
 }
