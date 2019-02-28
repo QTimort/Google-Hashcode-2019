@@ -1,5 +1,6 @@
 package eu.epitech.hashcode_2019;
 
+import eu.epitech.hashcode_2019.model.Image;
 import eu.epitech.hashcode_2019.model.InputData;
 
 import java.io.ByteArrayInputStream;
@@ -27,7 +28,20 @@ public class Parser {
         try (final Scanner ignored = scanner) {
             final InputData inputData = new InputData();
 
-            // todo parse
+            inputData.setNbPhoto(scanner.nextInt());
+            inputData.allocImages();
+            scanner.nextLine();
+            for (int i = 0; i < inputData.getNbPhoto(); ++i) {
+                final String[] s = scanner.nextLine().split(" ");
+                final Image image = new Image();
+                image.setHorizontal(s[0].equals("H"));
+                image.setNbTag(Integer.parseInt(s[1]));
+                image.allocTags();
+                for (int j = 0; j < image.getNbTag(); ++j) {
+                    image.getTags()[j] = s[2 + j];
+                }
+                inputData.getImages()[i] = image;
+            }
 
             return (inputData);
         }

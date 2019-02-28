@@ -1,11 +1,11 @@
 package eu.epitech.hashcode_2019;
 
-
 import eu.epitech.hashcode_2019.model.InputData;
 import eu.epitech.hashcode_2019.solver.ISolver;
 import eu.epitech.hashcode_2019.solver.SolverImpl;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,11 @@ public class Main {
         final List<String> inputs = new ArrayList<>(Arrays.asList(args));
         final ISolver solver = new SolverImpl();
         if (inputs.isEmpty()) {
-            inputs.add("a_example.in");
+            inputs.add("a_example.txt");
+            inputs.add("b_lovely_landscapes.txt");
+            inputs.add("c_memorable_moments.txt");
+            inputs.add("d_pet_pictures.txt");
+            inputs.add("e_shiny_selfies.txt");
         }
 
         inputs.forEach(input -> {
