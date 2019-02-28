@@ -19,7 +19,6 @@ public class Main {
 
     public static void main(String[] args) {
         final List<String> inputs = new ArrayList<>(Arrays.asList(args));
-        final ISolver solver = new SolverImpl();
         if (inputs.isEmpty()) {
             inputs.add("a_example.txt");
             inputs.add("b_lovely_landscapes.txt");
@@ -37,10 +36,8 @@ public class Main {
             System.out.println("\t Horizontal Images: " + OpDictionnary.horiImageIds.size());
             System.out.println("\t Potential: " + ((long)OpDictionnary.tags.size()) * OpDictionnary.images.length);
             //System.out.println(inputData);
+            final ISolver solver = new SolverImpl();
             final List<Slide> solution = solver.solve();
-            final Slide slide = new Slide();
-            slide.setImageIds(Arrays.asList(0, 42));
-            solution.add(slide);
             //new Validator(inputData).validate(solution);
             //System.out.println(Score.compute(solution));
             final String inputName =  input.substring(0, input.lastIndexOf('.'));

@@ -26,6 +26,8 @@ public class OpDictionnary {
         final Map<Integer, List<Integer>> imagesPopularity = new TreeMap<>();
         imagesByPopularity = new ArrayDeque<>(images.length);
         for (final Image image : images) {
+            if (image.isHorizontal())
+                continue;
             final int popularity = getImageTagsPopularity(image.getId());
             final List<Integer> imageIds = imagesPopularity.get(popularity);
             if (imageIds != null) {
