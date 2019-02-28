@@ -1,11 +1,11 @@
 package eu.epitech.hashcode_2019;
 
-import eu.epitech.hashcode_2019.model.InputData;
+import com.google.common.collect.Lists;
+import eu.epitech.hashcode_2019.model.Slide;
 import eu.epitech.hashcode_2019.solver.ISolver;
 import eu.epitech.hashcode_2019.solver.SolverImpl;
 
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,11 +30,14 @@ public class Main {
         }
 
         inputs.forEach(input -> {
-            final InputData inputData = Parser.toInputData(getInputResource(input));
+            Parser.parse(getInputResource(input));
             //System.out.println(inputData);
-            final Object solution = solver.solve(inputData);
-            new Validator(inputData).validate(solution);
-            System.out.println(Score.compute(solution));
+            final List<Slide> solution = solver.solve();
+            final Slide slide = new Slide();
+            slide.setImageIds(Arrays.asList(0, 42));
+            solution.add(slide);
+            //new Validator(inputData).validate(solution);
+            //System.out.println(Score.compute(solution));
             final String inputName =  input.substring(0, input.lastIndexOf('.'));
             Writer.submissionToFile(OUT_PATH + inputName.concat(".out"), false, solution);
         });

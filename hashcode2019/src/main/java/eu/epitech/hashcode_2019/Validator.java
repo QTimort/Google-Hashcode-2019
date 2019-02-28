@@ -1,13 +1,11 @@
 package eu.epitech.hashcode_2019;
 
-import eu.epitech.hashcode_2019.model.InputData;
+
+import eu.epitech.hashcode_2019.model.Slide;
+
+import java.util.List;
 
 public class Validator {
-    private final InputData inputData;
-
-    public Validator(InputData inputData) {
-        this.inputData = inputData;
-    }
 
     public static void Assert(boolean predicate) {
         Assert(predicate, "");
@@ -18,7 +16,7 @@ public class Validator {
             throw new RuntimeException("Assertion failed: " + message);
     }
 
-    public void validate(Object solution) {
+    public void validate(List<Slide> solution) {
         Assert(true);
     }
 }

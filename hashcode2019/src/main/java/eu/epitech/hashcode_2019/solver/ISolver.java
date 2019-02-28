@@ -1,7 +1,9 @@
 package eu.epitech.hashcode_2019.solver;
 
-import eu.epitech.hashcode_2019.model.InputData;
+import eu.epitech.hashcode_2019.model.Slide;
+
+import java.util.List;
 
 public interface ISolver {
-    Object solve(InputData inputData);
+    List<Slide> solve();
 }
