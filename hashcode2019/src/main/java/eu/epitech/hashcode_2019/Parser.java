@@ -39,8 +39,9 @@ public class Parser {
                 image.setId(i);
                 Dictionnary.images[i] = image;
                 final int nbTags = Integer.parseInt(s[1]);
+                image.setTags(new int[nbTags]);
                 for (int j = 0; j < nbTags; ++j) {
-                    Dictionnary.addTagOp(i, s[2 + j]);
+                    image.getTags()[j] = Dictionnary.addTagOp(i, s[2 + j]);
                 }
             }
         }
