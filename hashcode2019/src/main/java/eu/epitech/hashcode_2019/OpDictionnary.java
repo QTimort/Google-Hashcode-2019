@@ -2,6 +2,7 @@ package eu.epitech.hashcode_2019;
 
 import com.google.common.collect.BiMap;
 import eu.epitech.hashcode_2019.model.Image;
+import eu.epitech.hashcode_2019.model.Slide;
 
 import java.util.*;
 
@@ -35,7 +36,7 @@ public class OpDictionnary {
             } else {
                 final List<Integer> imageList = new ArrayList<>();
                 imageList.add(image.getId());
-                imagesPopularity.put(image.getId(), imageList);
+                imagesPopularity.put(popularity, imageList);
             }
         }
         imagesPopularity.forEach((key, value) -> imagesByPopularity.addAll(value));
@@ -81,5 +82,26 @@ public class OpDictionnary {
             popularity += tagImages.get(tagId).size();
         }
         return popularity;
+    }
+
+    public static Deque<Slide> queueMySlides(final List<Slide> slides) {
+        final Map<Integer, List<Slide>> slidesPopularity = new TreeMap<>();
+        for (Slide slide : slides) {
+            int popularity = 0;
+            for (Integer imageId : slide.getImageIds()) {
+                popularity += getImageTagsPopularity(imageId);
+            }
+            final List<Slide> ss = slidesPopularity.get(popularity);
+            if (ss != null) {
+                ss.add(slide);
+            } else {
+                final List<Slide> slideList = new ArrayList<>();
+                slideList.add(slide);
+                slidesPopularity.put(popularity, slideList);
+            }
+        }
+        Deque<Slide> slideDeque = new ArrayDeque<>();
+        slidesPopularity.forEach((key, value) -> slideDeque.addAll(value));
+        return slideDeque;
     }
 }
