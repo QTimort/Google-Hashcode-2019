@@ -2,7 +2,7 @@ package eu.epitech.training_hashcode_2019;
 
 import eu.epitech.training_hashcode_2019.model.InputData;
 import eu.epitech.training_hashcode_2019.model.Slices;
-import eu.epitech.training_hashcode_2019.solver.FirstSolver;
+import eu.epitech.training_hashcode_2019.solver.LineSolver;
 import eu.epitech.training_hashcode_2019.solver.ISolver;
 
 import java.io.InputStream;
@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
         final List<String> inputs = new ArrayList<>(Arrays.asList(args));
-        final ISolver solver = new FirstSolver();
+        final ISolver solver = new LineSolver();
         if (inputs.isEmpty()) {
             inputs.add("a_example.in");
             inputs.add("b_small.in");
@@ -34,9 +34,9 @@ public class Main {
             final Slices slices = solver.solve(inputData);
             new Validator(inputData).validateSlices(slices);
             System.out.println(Score.compute(slices));
-            Writer.submissionToFile(
-                    OUT_PATH + input.substring(0, input.lastIndexOf('.')).concat(".out"), false, slices
-            );
+            final String inputName =  input.substring(0, input.lastIndexOf('.'));
+            Writer.submissionToFile(OUT_PATH + inputName.concat(".out"), false, slices);
+            Writer.writePizzaUsage(OUT_PATH + inputName.concat(".usage"), inputData, slices);
         });
     }
 }
