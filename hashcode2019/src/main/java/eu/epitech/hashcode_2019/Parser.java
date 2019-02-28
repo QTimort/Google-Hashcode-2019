@@ -28,20 +28,25 @@ public class Parser {
     public static void parse(final Scanner scanner) {
         try (final Scanner ignored = scanner) {
             final int nbImages = scanner.nextInt();
-            Dictionnary.images = new Image[nbImages];
-            Dictionnary.tags = HashBiMap.create(nbImages);
-            Dictionnary.tagImages = new HashMap<>(nbImages);
+            OpDictionnary.images = new Image[nbImages];
+            OpDictionnary.tags = HashBiMap.create(nbImages);
+            OpDictionnary.tagImages = new HashMap<>(nbImages);
             scanner.nextLine();
             for (int i = 0; i < nbImages; ++i) {
                 final String[] s = scanner.nextLine().split(" ");
                 final Image image = new Image();
                 image.setHorizontal(s[0].equals("H"));
+                if (image.isHorizontal()) {
+                    OpDictionnary.horiImageIds.add(i);
+                } else {
+                    OpDictionnary.vertImageIds.add(i);
+                }
                 image.setId(i);
-                Dictionnary.images[i] = image;
+                OpDictionnary.images[i] = image;
                 final int nbTags = Integer.parseInt(s[1]);
                 image.setTags(new int[nbTags]);
                 for (int j = 0; j < nbTags; ++j) {
-                    image.getTags()[j] = Dictionnary.addTagOp(i, s[2 + j]);
+                    image.getTags()[j] = OpDictionnary.addTagOp(i, s[2 + j]);
                 }
             }
         }
