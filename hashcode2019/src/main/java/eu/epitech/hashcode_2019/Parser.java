@@ -50,5 +50,6 @@ public class Parser {
                 }
             }
         }
+        OpDictionnary.computeImagesPopularity();
     }
 }

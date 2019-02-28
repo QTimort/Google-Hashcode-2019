@@ -11,6 +11,7 @@ public class OpDictionnary {
     public static Image[] images = null; // [Img_id]
     public static Set<Integer> vertImageIds = new HashSet<>();
     public static Set<Integer> horiImageIds = new HashSet<>();
+    public static Deque<Integer> imagesByPopularity = null;
 
     public static void factoryReset() {
         tags = null;
@@ -18,6 +19,24 @@ public class OpDictionnary {
         images = null;
         vertImageIds = new HashSet<>();
         horiImageIds = new HashSet<>();
+        imagesByPopularity = null;
+    }
+
+    public static void computeImagesPopularity() {
+        final Map<Integer, List<Integer>> imagesPopularity = new TreeMap<>();
+        imagesByPopularity = new ArrayDeque<>(images.length);
+        for (final Image image : images) {
+            final int popularity = getImageTagsPopularity(image.getId());
+            final List<Integer> imageIds = imagesPopularity.get(popularity);
+            if (imageIds != null) {
+                imageIds.add(image.getId());
+            } else {
+                final List<Integer> imageList = new ArrayList<>();
+                imageList.add(image.getId());
+                imagesPopularity.put(image.getId(), imageList);
+            }
+        }
+        imagesPopularity.forEach((key, value) -> imagesByPopularity.addAll(value));
     }
 
     public static int addTagOp(int imageId, String tag) {
