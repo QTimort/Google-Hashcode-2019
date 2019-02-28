@@ -30,6 +30,12 @@ public class Main {
 
         inputs.forEach(input -> {
             Parser.parse(getInputResource(input));
+            System.out.println("Op Dictionary contains for " + input + " : ");
+            System.out.println("\t Tags: " + OpDictionnary.tags.size());
+            System.out.println("\t Images: " + OpDictionnary.images.length);
+            System.out.println("\t Vertical Images: " + OpDictionnary.vertImageIds.size());
+            System.out.println("\t Horizontal Images: " + OpDictionnary.horiImageIds.size());
+            System.out.println("\t Potential: " + ((long)OpDictionnary.tags.size()) * OpDictionnary.images.length);
             //System.out.println(inputData);
             final List<Slide> solution = solver.solve();
             final Slide slide = new Slide();
@@ -39,6 +45,7 @@ public class Main {
             //System.out.println(Score.compute(solution));
             final String inputName =  input.substring(0, input.lastIndexOf('.'));
             Writer.submissionToFile(OUT_PATH + inputName.concat(".out"), false, solution);
+            OpDictionnary.factoryReset();
         });
     }
 }

@@ -6,11 +6,19 @@ import eu.epitech.hashcode_2019.model.Image;
 import java.util.*;
 
 public class OpDictionnary {
-    public static BiMap<String, Integer> tags; // <Tag, Tag_id>
-    public static Map<Integer, Set<Integer>> tagImages; // <Tag_id, Set<Img_id>>
-    public static Image[] images; // [Img_id]
+    public static BiMap<String, Integer> tags = null; // <Tag, Tag_id>
+    public static Map<Integer, Set<Integer>> tagImages = null; // <Tag_id, Set<Img_id>>
+    public static Image[] images = null; // [Img_id]
     public static Set<Integer> vertImageIds = new HashSet<>();
     public static Set<Integer> horiImageIds = new HashSet<>();
+
+    public static void factoryReset() {
+        tags = null;
+        tagImages = null;
+        images = null;
+        vertImageIds = new HashSet<>();
+        horiImageIds = new HashSet<>();
+    }
 
     public static int addTagOp(int imageId, String tag) {
         final int tagId;
