@@ -72,7 +72,6 @@ public class OpDictionnary {
             imageIds.remove(imageId);
         }
         vertImageIds.remove(imageId);
-        horiImageIds.remove(imageId);
     }
 
     public static int getImageTagsPopularity(int imageId) {
