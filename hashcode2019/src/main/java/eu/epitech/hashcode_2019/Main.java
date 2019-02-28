@@ -1,6 +1,5 @@
 package eu.epitech.hashcode_2019;
 
-import com.google.common.collect.Lists;
 import eu.epitech.hashcode_2019.model.Slide;
 import eu.epitech.hashcode_2019.solver.ISolver;
 import eu.epitech.hashcode_2019.solver.SolverImpl;
